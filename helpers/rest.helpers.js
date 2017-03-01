@@ -10,7 +10,7 @@ let http = require("http"),
  */
 exports.getJSON = function(options)
 {
-    console.log("rest::getJSON");
+    console.log('rest::getJSON');
     let reqHandler = options.port == 443 ? https : http;
 
     return new Promise((resolve, reject) => {
@@ -25,16 +25,23 @@ exports.getJSON = function(options)
             });
 
             res.on('end', () => {
-                let obj = JSON.parse(output);
-                // console.log('rest::', obj);
-                resolve({
-                    statusCode: res.statusCode,
-                    data: obj
-                });
+                try {
+                    let obj = JSON.parse(output);
+                    // console.log('rest::', obj);
+                    resolve({
+                        statusCode: res.statusCode,
+                        data: obj
+                    });
+                }
+                catch(err) {
+                    console.error('rest::end', err);
+                    reject(err);
+                }
             });
         });
 
         req.on('error', (err) => {
+            console.error('rest::request', err);
             reject(err);
         });
 

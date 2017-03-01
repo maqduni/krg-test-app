@@ -34,8 +34,6 @@ router.get('/', (req, res, next) => {
     }).then(({status, data}) => {
         // Sort results and fill in void dates
         let dateLookupMap = {};
-        // console.log(data);
-
         res.send(
             data.data.sort((a, b) => {
                 // console.log(`a: ${a.date} ${a.date > b.date ? '>' : a.date < b.date ? '<' : '=='} b: ${b.date} `);
@@ -56,14 +54,7 @@ router.get('/', (req, res, next) => {
                     val);
             }, [])
         );
-
-        // res.send({
-        //     message: 'posts',
-        //     status: status,
-        //     result: data
-        // });
     }, (error) => {
-        // console.error('Promise error', error);
         next(error);
     });
 });

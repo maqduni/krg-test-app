@@ -13,14 +13,7 @@ router.get('/:id', (req, res, next) => {
         method: 'GET'
     }).then(({status, data}) => {
         res.send(data);
-
-        // res.send({
-        //     message: 'posts',
-        //     status: status,
-        //     result: data
-        // });
     }, (error) => {
-        // console.error('Promise error', error);
         next(error);
     });
 });
@@ -32,14 +25,7 @@ router.get('/', (req, res, next) => {
         method: 'GET'
     }).then(({status, data}) => {
         res.send(data);
-
-        // res.send({
-        //     message: 'all posts',
-        //     status: status,
-        //     result: data
-        // });
     }, (error) => {
-        // console.error('Promise error', error);
         next(error);
     });
 });

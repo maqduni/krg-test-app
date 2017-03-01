@@ -23,14 +23,16 @@ app.use('/', express.static('wwwroot', options));
 
 // Error handling
 app.use((err, req, res, next) => {
+    console.error('Error', err.stack || err);
+
     if (res.headersSent) {
         return next(err);
     }
 
-    console.error('Error handler', err.stack || err);
     res.status(500).send({
         message: 'Error occured',
-        stack: err.stack || err
+        error: err,
+        stack: err.stack
     });
 });
 
