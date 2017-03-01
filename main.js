@@ -5,7 +5,7 @@ let express = require('express'),
 // API Routes
 let routes = [
     require('./api/posts.proxy'),
-    // require('./trackers.proxy')
+    require('./api/trackers.proxy')
 ];
 routes.forEach(({prefix, router}) => {
     console.log(`Registering router at ${prefix}`);
@@ -18,7 +18,7 @@ let options = {
     etag: false,
     extensions: ['html', 'ts', 'css', 'js']
 }
-// For dev environemnt
+// Use 'wwwroot' for dev environemnt, otherwise use 'wwwroot/public'
 app.use('/', express.static('wwwroot', options));
 
 // Error handling
