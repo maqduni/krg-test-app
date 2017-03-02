@@ -61,5 +61,5 @@ router.get('/', (req, res, next) => {
 
 module.exports = {
     router: router,
-    prefix: '/trackers'
+    prefix: '/api/trackers'
 };

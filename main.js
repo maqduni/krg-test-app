@@ -1,6 +1,22 @@
 // App
 let express = require('express'),
-    app = express();
+    app = express(),
+    history = require('connect-history-api-fallback');
+
+// Error handling
+app.use((err, req, res, next) => {
+    console.error('Error', err.stack || err);
+
+    if (res.headersSent) {
+        return next(err);
+    }
+
+    res.status(500).send({
+        message: 'An error occured',
+        error: err,
+        stack: err.stack
+    });
+});
 
 // API Routes
 let routes = [
@@ -19,22 +35,13 @@ let options = {
     extensions: ['html', 'ts', 'css', 'js']
 }
 // Use 'wwwroot' for dev environemnt, otherwise use 'wwwroot/public'
-app.use('/', express.static('wwwroot', options));
+app.use(express.static('./wwwroot', options));
 
-// Error handling
-app.use((err, req, res, next) => {
-    console.error('Error', err.stack || err);
-
-    if (res.headersSent) {
-        return next(err);
-    }
-
-    res.status(500).send({
-        message: 'Error occured',
-        error: err,
-        stack: err.stack
-    });
-});
+// This is required to support path location strategy in AngularJS2
+// TODO: Requires closer investigation, defaulted to hash location strategy for now
+// app.use(history({
+//     verbose: true
+// }));
 
 let server = app.listen(8080, () => {
     let host = server.address().address,
