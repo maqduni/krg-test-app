@@ -1,5 +1,6 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserModule } from "@angular/platform-browser";
 
 import { PostService } from "./post.service";
 import { PostListComponent } from "./post-list.component";
@@ -13,7 +14,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    [ RouterModule.forChild(routes) ]
+      BrowserModule,
+      [ RouterModule.forChild(routes) ]
   ],
   exports: [ RouterModule ],
   declarations: [

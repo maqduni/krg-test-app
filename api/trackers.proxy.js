@@ -34,7 +34,7 @@ router.get('/', (req, res, next) => {
     }).then(({status, data}) => {
         // Sort results and fill in void dates
         let dateLookupMap = {};
-        res.send(
+        res.json(
             data.data.sort((a, b) => {
                 // console.log(`a: ${a.date} ${a.date > b.date ? '>' : a.date < b.date ? '<' : '=='} b: ${b.date} `);
                 return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;

@@ -1,3 +1,7 @@
 <pre>
     Post List Component
+    <div *ngFor="let post of posts"
+         (click)="gotoPost(post)" class="post">
+      {{hero.name}}
+    </div>
 </pre>

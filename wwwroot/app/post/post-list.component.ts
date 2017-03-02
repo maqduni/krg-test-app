@@ -30,6 +30,7 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.getPosts().then((data) => {
+        console.log(data);
         this.posts = data;
     });
   }

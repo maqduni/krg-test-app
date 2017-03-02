@@ -17,7 +17,7 @@ export class PostService {
     const url = `${this.apiUrl}/posts`;
     return this.http.get(url)
                .toPromise()
-               .then(response => response.json().data as Post[])
+               .then(response => response.json() as Post[])
                .catch(this.handleError);
   }
 
@@ -25,7 +25,7 @@ export class PostService {
     const url = `${this.apiUrl}/posts/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Post)
+      .then(response => response.json() as Post)
       .catch(this.handleError);
   }
 
@@ -33,7 +33,7 @@ export class PostService {
     const url = `${this.apiUrl}/trackers?from=${from}&to=${to}`;
     return this.http.get(url)
                .toPromise()
-               .then(response => response.json().data as Tracker[])
+               .then(response => response.json() as Tracker[])
                .catch(this.handleError);
   }
 

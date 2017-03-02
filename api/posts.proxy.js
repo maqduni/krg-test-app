@@ -12,7 +12,7 @@ router.get('/:id', (req, res, next) => {
         path: `/posts/${req.params.id}`,
         method: 'GET'
     }).then(({status, data}) => {
-        res.send(data);
+        res.json(data);
     }, (error) => {
         next(error);
     });
@@ -24,7 +24,7 @@ router.get('/', (req, res, next) => {
         path: `/posts`,
         method: 'GET'
     }).then(({status, data}) => {
-        res.send(data);
+        res.json(data);
     }, (error) => {
         next(error);
     });
