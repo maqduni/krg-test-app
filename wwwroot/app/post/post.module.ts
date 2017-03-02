@@ -5,6 +5,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { PostService } from "./post.service";
 import { PostListComponent } from "./post-list.component";
 import { PostDetailComponent } from "./post-detail.component";
+import { PostComponent } from "./post.component";
 
 // Define module routes
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   exports: [ RouterModule ],
   declarations: [
     PostListComponent,
+    PostComponent,
     PostDetailComponent
   ],
   providers: [ PostService ]

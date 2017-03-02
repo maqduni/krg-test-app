@@ -1,3 +1,22 @@
 <pre>
-    Post Detail Component
+    <div>Post Detail Component</div>
+    <div>{{current|json}}</div>
 </pre>
+<div>
+    <div>Display Tracker Info</div>
+
+    <label for="fromBox">From:</label>
+    <input #fromBox id="fromBox" (keyup)="getTrackers(fromBox.value, toBox.value)" value="2015-01-01"/>
+
+    <label for="toBox">To:</label>
+    <input #toBox id="toBox" (keyup)="getTrackers(fromBox.value, toBox.value)" value="2015-03-01"/>
+
+    <div>
+        <span *ngFor="let tracker of trackers | async">.</span>
+    </div>
+
+    <pre>
+        <div><a (click)="displayTrackersJson = !displayTrackersJson">Show trackers JSON</a></div>
+        <div [hidden]="!displayTrackersJson">{{trackers|async|json}}</div>
+    </pre>
+</div>

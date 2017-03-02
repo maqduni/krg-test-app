@@ -17,7 +17,7 @@ import { Post } from './data-models/post';
 
 @Component({
   moduleId: module.id,
-  selector: 'post-list',
+  // selector: 'post-list',
   templateUrl: './post-list.component.html',
   styleUrls: [ './post-list.component.css' ]
 })
@@ -30,11 +30,11 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.getPosts().then((data) => {
-        console.log(data);
         this.posts = data;
     });
   }
 
+  // TODO: Can be done using a routerLink directive in the template
   gotoDetail(post: Post): void {
     let link = ['/posts', post.id];
     this.router.navigate(link);

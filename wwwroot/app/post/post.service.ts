@@ -2,6 +2,8 @@ import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/map';
 
 import { Post } from './data-models/post';
 import { Tracker } from './data-models/tracker';
@@ -29,12 +31,10 @@ export class PostService {
       .catch(this.handleError);
   }
 
-  getTrackers(from: string, to: string): Promise<Tracker[]> {
+  getTrackers(from: string, to: string): Observable<Tracker[]> {
     const url = `${this.apiUrl}/trackers?from=${from}&to=${to}`;
     return this.http.get(url)
-               .toPromise()
-               .then(response => response.json() as Tracker[])
-               .catch(this.handleError);
+               .map(response => response.json() as Tracker[]);
   }
 
   private handleError(error: any): Promise<any> {

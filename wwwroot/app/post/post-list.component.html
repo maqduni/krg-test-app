@@ -1,7 +1,4 @@
 <pre>
-    Post List Component
-    <div *ngFor="let post of posts"
-         (click)="gotoPost(post)" class="post">
-      {{hero.name}}
-    </div>
+    <div>Post List Component</div>
+    <post [current]="post" *ngFor="let post of posts" (click)="gotoDetail(post)"></post>
 </pre>
