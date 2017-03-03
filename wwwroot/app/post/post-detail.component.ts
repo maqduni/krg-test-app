@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -12,6 +12,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/finally';
 
 import { PostService } from './post.service';
 import { Post } from './data-models/post';
@@ -19,7 +20,6 @@ import { Tracker } from "./data-models/tracker";
 
 @Component({
   moduleId: module.id,
-  // selector: 'post-detail',
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.css']
 })
@@ -31,7 +31,6 @@ export class PostDetailComponent implements OnInit {
   private routeParamsSub: any;
 
   constructor(
-    private zone:NgZone,
     private postService: PostService,
     private route: ActivatedRoute) { }
 
@@ -49,22 +48,19 @@ export class PostDetailComponent implements OnInit {
       .debounceTime(300)        // wait 300ms after each keystroke before considering the term
       .distinctUntilChanged()   // ignore if next search term is same as previous
       .switchMap(terms => {
-        return terms['from'] && terms['to']   // switch to new observable each time the term changes
-        // return the http search observable
+        let trackers = terms['from'] && terms['to']
         ? this.postService.getTrackers(terms['from'], terms['to'])
-        // or the observable of empty heroes if there was no search term
         : Observable.of<Tracker[]>([]);
+
+        return trackers;
       })
       .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
         return Observable.of<Tracker[]>([]);
       });
 
-      // TODO: Can be done in a more elegant way, observe FormControl value?
-      // this.zone.run(() => {
-      //     this.getTrackers('2015-01-01', '2015-03-01');
-      // });
+      // TODO: Can be done in a much more elegant way, observe FormControl value?
+      // TODO: Figure out how to update the view
+      this.getTrackers('2015-01-01', '2015-03-01');
   }
 
   ngOnDestroy(): void {
