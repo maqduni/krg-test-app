@@ -36,8 +36,12 @@ router.get('/', (req, res, next) => {
         let dateLookupMap = {};
         res.json(
             data.data.sort((a, b) => {
+                let aDate = dateLookupMap[a.date] || (dateLookupMap[a.date] = new Date(a.date)),
+                    bDate = dateLookupMap[b.date] || (dateLookupMap[b.date] = new Date(b.date));
+                return aDate.getTime() > bDate.getTime() ? 1 : aDate.getTime() < bDate.getTime() ? -1 : 0;
+                
                 // console.log(`a: ${a.date} ${a.date > b.date ? '>' : a.date < b.date ? '<' : '=='} b: ${b.date} `);
-                return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
+                // return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
             })
             .reduce((acc, val) => {
                 // console.log(acc);

@@ -11,7 +11,7 @@ let http = require("http"),
 exports.getJSON = function(options)
 {
     console.log('rest::getJSON');
-    let reqHandler = options.port == 443 ? https : http;
+    let reqHandler = +options.port === 443 ? https : http;
 
     return new Promise((resolve, reject) => {
         let req = reqHandler.request(options, (res) =>

@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -23,7 +23,7 @@ import { Tracker } from "./data-models/tracker";
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.css']
 })
-export class PostDetailComponent implements OnInit {
+export class PostDetailComponent implements OnInit, AfterViewInit {
   current: Post;
   
   trackers: Observable<Tracker[]>;
@@ -46,7 +46,7 @@ export class PostDetailComponent implements OnInit {
      */
     this.trackers = this.trackersTerms
       .debounceTime(300)        // wait 300ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
+      //.distinctUntilChanged()   // TODO: ignore if next search term is same as previous
       .switchMap(terms => {
         let trackers = terms['from'] && terms['to']
         ? this.postService.getTrackers(terms['from'], terms['to'])
@@ -57,10 +57,10 @@ export class PostDetailComponent implements OnInit {
       .catch(error => {
         return Observable.of<Tracker[]>([]);
       });
+  }
 
-      // TODO: Can be done in a much more elegant way, observe FormControl value?
-      // TODO: Figure out how to update the view
-      this.getTrackers('2015-01-01', '2015-03-01');
+  ngAfterViewInit(): void {
+    this.getTrackers('2015-01-01', '2015-03-01');
   }
 
   ngOnDestroy(): void {
