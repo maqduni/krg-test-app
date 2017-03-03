@@ -17,12 +17,12 @@ import { Post } from './data-models/post';
 
 @Component({
   moduleId: module.id,
-  selector: 'post',
+  selector: '[post]',
   templateUrl: './post.component.html',
   styleUrls: [ './post.component.css' ]
 })
 export class PostComponent implements OnInit {
-  @Input() current: Post;
+  @Input('post') current: Post;
 
   constructor(private router: Router) {}
 

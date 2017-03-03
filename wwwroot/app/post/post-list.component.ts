@@ -17,7 +17,6 @@ import { Post } from './data-models/post';
 
 @Component({
   moduleId: module.id,
-  // selector: 'post-list',
   templateUrl: './post-list.component.html',
   styleUrls: [ './post-list.component.css' ]
 })

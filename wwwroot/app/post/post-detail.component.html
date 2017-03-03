@@ -1,9 +1,16 @@
-<pre>
-    <div>Post Detail Component</div>
-    <div>{{current|json}}</div>
-</pre>
-<div>
-    <div>Display Tracker Info</div>
+<section>
+    <h2>Post Detail</h2>
+    
+    <!--<pre>{{current|json}}</pre>-->
+    <div class="row">
+        <strong class="col-md-1">User Id:</strong><span class="col-md-11">{{current?.userId}}</span>
+        <strong class="col-md-1">Id:</strong><span class="col-md-11">{{current?.id}}</span>
+        <strong class="col-md-1">Title:</strong><span class="col-md-11">{{current?.title}}</span>
+        <strong class="col-md-1">Body:</strong><span class="col-md-11">{{current?.body}}</span>
+    </div>
+</section>
+<section>
+    <h2>Tracker Info</h2>
 
     <label for="fromBox">From:</label>
     <input #fromBox id="fromBox" (keyup)="getTrackers(fromBox.value, toBox.value)" value="2015-01-01"/>
@@ -11,12 +18,24 @@
     <label for="toBox">To:</label>
     <input #toBox id="toBox" (keyup)="getTrackers(fromBox.value, toBox.value)" value="2015-03-01"/>
 
-    <div>
-        <span *ngFor="let tracker of trackers | async">.</span>
-    </div>
-
-    <pre>
-        <div><a (click)="displayTrackersJson = !displayTrackersJson">Show trackers JSON</a></div>
-        <div [hidden]="!displayTrackersJson">{{trackers|async|json}}</div>
-    </pre>
-</div>
+    <a (click)="displayTrackersJson = !displayTrackersJson">{{displayTrackersJson ? 'Hide' : 'Show'}} trackers JSON</a>
+    
+    <table class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Hits</th>
+                    <th>Date</th>
+                    <th [hidden]="!displayTrackersJson">JSON</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tracker of trackers | async">
+                    <td>{{tracker.id}}</td>
+                    <td>{{tracker.hits}}</td>
+                    <td>{{tracker.date}}</td>
+                    <td [hidden]="!displayTrackersJson"><pre>{{tracker|json}}</pre></td>
+                </tr>
+            </tbody>
+        </table>
+</section>
