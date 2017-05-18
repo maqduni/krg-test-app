@@ -1,4 +1,4 @@
-# kargo-test-app
+# krg-test-app
 ##The project consists of two separate applications, server and client
 
 1. ExpressJS server contains two route handlers which fetch posts and trackers from provided web APIs. Trackers are filled in with missing dates before being returned from the trackers route handler.
@@ -11,10 +11,10 @@ Each of the applications has it's own packages.json file with separately defined
 ##Run instructions
 
 1. Install server dependencies
-	`kargo-test-app > npm install`
+	`> npm install`
 
 2. Install client dependencies
-  `kargo-test-app/wwwroot > npm install`
+  `wwwroot > npm install`
 
 3. Start the server
-	`kargo-test-app > npm run dev`
+	`> npm run dev`
