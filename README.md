@@ -1,5 +1,5 @@
 # krg-test-app
-##The project consists of two separate applications, server and client
+## The project consists of two separate applications, server and client
 
 1. ExpressJS server contains two route handlers which fetch posts and trackers from provided web APIs. Trackers are filled in with missing dates before being returned from the trackers route handler.
 
@@ -8,7 +8,7 @@
 Each of the applications has it's own packages.json file with separately defined dependencies.
 
 
-##Run instructions
+## Run instructions
 
 1. Install server dependencies
 	`> npm install`
